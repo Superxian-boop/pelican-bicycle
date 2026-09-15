@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>鹈鹕骑自行车 · 动态 SVG</title>
+<style>
+  html, body { margin: 0; padding: 0; min-height: 100%; }
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    padding: 32px 16px;
+    background: radial-gradient(circle at 50% 0%, #eef6fb 0%, #dbe8f2 60%, #cddcea 100%);
+    font-family: "Segoe UI", "Microsoft YaHei", system-ui, sans-serif;
+    box-sizing: border-box;
+  }
+  figure {
+    margin: 0;
+    width: min(920px, 100%);
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 18px 44px rgba(23, 47, 71, .18), 0 2px 6px rgba(23, 47, 71, .08);
+    overflow: hidden;
+  }
+  svg { display: block; width: 100%; height: auto; }
+  figcaption {
+    margin: 0;
+    padding: 14px 4px 0;
+    font-size: 14px;
+    letter-spacing: .04em;
+    color: #4a5b6b;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+<figure>
+<svg id="scene" viewBox="0 0 800 560" role="img" aria-labelledby="title desc"
+     xmlns="http://www.w3.org/2000/svg">
+  <title id="title">骑自行车的鹈鹕（动态）</title>
+  <desc id="desc">一只白色鹈鹕踩着自行车向右骑行：车轮转动、双腿跟着踏板蹬踏、身体随节奏上下起伏、翅膀轻拍，背景有云朵飘移和表示速度的线条。</desc>
+
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#cfeafa"/>
+      <stop offset="55%"  stop-color="#e8f5fd"/>
+      <stop offset="100%" stop-color="#f8fcff"/>
+    </linearGradient>
+    <linearGradient id="field" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#cfe9cf"/>
+      <stop offset="100%" stop-color="#a9d3ad"/>
+    </linearGradient>
+    <linearGradient id="bodyGrad" x1="0.2" y1="0" x2="0.8" y2="1">
+      <stop offset="0%"   stop-color="#ffffff"/>
+      <stop offset="70%"  stop-color="#f2f6fa"/>
+      <stop offset="100%" stop-color="#dde6ee"/>
+    </linearGradient>
+    <linearGradient id="wingGrad" x1="0" y1="0" x2="0.6" y2="1">
+      <stop offset="0%"   stop-color="#f7fafd"/>
+      <stop offset="100%" stop-color="#dae4ed"/>
+    </linearGradient>
+    <linearGradient id="beakGrad" x1="0" y1="0" x2="1" y2="0.4">
+      <stop offset="0%"   stop-color="#ffc15e"/>
+      <stop offset="100%" stop-color="#f09419"/>
+    </linearGradient>
+    <linearGradient id="pouchGrad" x1="0" y1="0" x2="0.3" y2="1">
+      <stop offset="0%"   stop-color="#ffd489"/>
+      <stop offset="100%" stop-color="#efa32a"/>
+    </linearGradient>
+    <linearGradient id="frameGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"   stop-color="#4b8fd0"/>
+      <stop offset="100%" stop-color="#245f96"/>
+    </linearGradient>
+    <linearGradient id="tyreGrad" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0%"   stop-color="#4a5764"/>
+      <stop offset="100%" stop-color="#2c363f"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ==================== background ==================== -->
+  <rect x="0" y="0" width="800" height="560" fill="url(#sky)"/>
+
+  <!-- sun with a slow breathing glow -->
+  <circle cx="112" cy="92" r="58" fill="#ffe9a8">
+    <animate attributeName="opacity" values="0.45;0.7;0.45" dur="5s" repeatCount="indefinite"/>
+    <animate attributeName="r" values="56;62;56" dur="5s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="112" cy="92" r="40" fill="#ffd978"/>
+
+  <!-- clouds drifting across (both start and end off-canvas, so the reset never shows) -->
+  <g fill="#ffffff" opacity=".92">
+    <animateTransform attributeName="transform" type="translate"
+                      values="-260 0; 1060 0" dur="46s" repeatCount="indefinite"/>
+    <ellipse cx="318" cy="86" rx="52" ry="26"/>
+    <ellipse cx="360" cy="94" rx="38" ry="20"/>
+    <ellipse cx="286" cy="98" rx="34" ry="18"/>
+  </g>
+  <g fill="#ffffff" opacity=".72">
+    <animateTransform attributeName="transform" type="translate"
+                      values="-120 0; 980 0" dur="62s" repeatCount="indefinite"/>
+    <ellipse cx="640" cy="62" rx="44" ry="21"/>
+    <ellipse cx="676" cy="70" rx="30" ry="16"/>
+  </g>
+
+  <!-- ground -->
+  <path d="M0,462 Q 200,428 420,452 T 800,444 L800,560 L0,560 Z" fill="url(#field)"/>
+  <path d="M0,486 Q 240,468 460,482 T 800,476" fill="none" stroke="#8fc498" stroke-width="3" opacity=".7"/>
+
+  <!-- roadside dashes: spaced exactly 120px apart, moved exactly 120px, so the
+       loop is seamless and reads as continuous forward motion -->
+  <g stroke="#9ec9a4" stroke-width="5" stroke-linecap="round" opacity=".85">
+    <animateTransform attributeName="transform" type="translate"
+                      values="0 0; -120 0" dur="0.22s" repeatCount="indefinite"/>
+    <line x1="-120" y1="502" x2="-88" y2="502"/>
+    <line x1="0"    y1="502" x2="32"  y2="502"/>
+    <line x1="120"  y1="502" x2="152" y2="502"/>
+    <line x1="240"  y1="502" x2="272" y2="502"/>
+    <line x1="360"  y1="502" x2="392" y2="502"/>
+    <line x1="480"  y1="502" x2="512" y2="502"/>
+    <line x1="600"  y1="502" x2="632" y2="502"/>
+    <line x1="720"  y1="502" x2="752" y2="502"/>
+    <line x1="840"  y1="502" x2="872" y2="502"/>
+    <line x1="960"  y1="502" x2="992" y2="502"/>
+  </g>
+
+  <!-- speed lines rushing past -->
+  <g stroke="#9fb6c9" stroke-width="6" stroke-linecap="round">
+    <line x1="52" y1="372" x2="140" y2="372">
+      <animateTransform attributeName="transform" type="translate" values="0 0; -130 0" dur="0.42s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.6;0" dur="0.42s" repeatCount="indefinite"/>
+    </line>
+    <line x1="30" y1="404" x2="128" y2="404">
+      <animateTransform attributeName="transform" type="translate" values="0 0; -130 0" dur="0.34s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.55;0" dur="0.34s" repeatCount="indefinite"/>
+    </line>
+    <line x1="60" y1="436" x2="132" y2="436">
+      <animateTransform attributeName="transform" type="translate" values="0 0; -130 0" dur="0.5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.5;0" dur="0.5s" repeatCount="indefinite"/>
+    </line>
+  </g>
+
+  <!-- shadow -->
+  <ellipse cx="405" cy="468" rx="214" ry="15" fill="#2f4a5a" opacity=".16"/>
+
+  <!-- ==================== bicycle ==================== -->
+  <!-- rear wheel: spokes and rim spin -->
+  <g>
+    <circle cx="255" cy="400" r="62" fill="none" stroke="url(#tyreGrad)" stroke-width="10"/>
+    <g>
+      <animateTransform attributeName="transform" type="rotate" values="0 255 400; 360 255 400"
+                        dur="0.7s" repeatCount="indefinite"/>
+      <circle cx="255" cy="400" r="54" fill="none" stroke="#cfd8e3" stroke-width="4"/>
+      <g stroke="#a9b5c2" stroke-width="2">
+        <line x1="255" y1="346" x2="255" y2="454"/>
+        <line x1="201" y1="400" x2="309" y2="400"/>
+        <line x1="217" y1="362" x2="293" y2="438"/>
+        <line x1="293" y1="362" x2="217" y2="438"/>
+      </g>
+      <circle cx="255" cy="352" r="4" fill="#e0655b"/>
+    </g>
+    <circle cx="255" cy="400" r="9" fill="#37424d"/>
+  </g>
+
+  <!-- front wheel -->
+  <g>
+    <circle cx="555" cy="400" r="62" fill="none" stroke="url(#tyreGrad)" stroke-width="10"/>
+    <g>
+      <animateTransform attributeName="transform" type="rotate" values="0 555 400; 360 555 400"
+                        dur="0.7s" repeatCount="indefinite"/>
+      <circle cx="555" cy="400" r="54" fill="none" stroke="#cfd8e3" stroke-width="4"/>
+      <g stroke="#a9b5c2" stroke-width="2">
+        <line x1="555" y1="346" x2="555" y2="454"/>
+        <line x1="501" y1="400" x2="609" y2="400"/>
+        <line x1="517" y1="362" x2="593" y2="438"/>
+        <line x1="593" y1="362" x2="517" y2="438"/>
+      </g>
+      <circle cx="555" cy="352" r="4" fill="#e0655b"/>
+    </g>
+    <circle cx="555" cy="400" r="9" fill="#37424d"/>
+  </g>
+
+  <!-- chain -->
+  <g stroke="#8d99a6" stroke-width="3" fill="none">
+    <path d="M255,392 L398,382"/>
+    <path d="M255,408 L398,414"/>
+  </g>
+
+  <!-- far leg sits behind the frame, the way a far limb should be occluded.
+       Its keyframes come from two-link inverse kinematics, one per 45° of crank rotation. -->
+  <path fill="none" stroke="#c97c1e" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"
+        d="M334,294 L393.8,288.7 L379.6,379.6">
+    <animate attributeName="d" dur="1.8s" repeatCount="indefinite" calcMode="linear"
+      values="M334,294 L393.8,288.7 L379.6,379.6;M334,294 L392.4,280.2 L398.0,372.0;M334,294 L393.9,290.4 L416.4,379.6;M334,294 L391.2,312.0 L424.0,398.0;M334,294 L380.8,331.5 L416.4,416.4;M334,294 L378.7,334.1 L398.0,424.0;M334,294 L385.6,324.6 L379.6,416.4;M334,294 L392.3,308.3 L372.0,398.0;M334,294 L393.8,288.7 L379.6,379.6"/>
+  </path>
+
+  <!-- frame -->
+  <g stroke="url(#frameGrad)" stroke-width="9" stroke-linecap="round" fill="none">
+    <path d="M255,400 L398,398"/>
+    <path d="M255,400 L352,300"/>
+    <path d="M398,398 L352,300"/>
+    <path d="M398,398 L512,320"/>
+    <path d="M352,300 L505,275"/>
+    <path d="M505,275 L512,320"/>
+    <path d="M512,320 L555,400"/>
+  </g>
+
+  <!-- handlebar -->
+  <g stroke="#37424d" stroke-width="7" stroke-linecap="round" fill="none">
+    <path d="M505,275 L500,258"/>
+    <path d="M474,254 Q500,242 528,254"/>
+  </g>
+
+  <!-- chainring (static) -->
+  <circle cx="398" cy="398" r="19" fill="none" stroke="#8d99a6" stroke-width="4"/>
+
+  <!-- cranks, pedals and webbed feet: the crank turns one way, each pedal and
+       foot counter-rotates so they stay level -->
+  <g>
+    <animateTransform attributeName="transform" type="rotate" values="0 398 398; 360 398 398"
+                      dur="1.8s" repeatCount="indefinite"/>
+
+    <line x1="398" y1="398" x2="416.4" y2="416.4" stroke="#37424d" stroke-width="7" stroke-linecap="round"/>
+    <line x1="398" y1="398" x2="379.6" y2="379.6" stroke="#37424d" stroke-width="7" stroke-linecap="round"/>
+
+    <g>
+      <animateTransform attributeName="transform" type="rotate" values="0 416.4 416.4; -360 416.4 416.4"
+                        dur="1.8s" repeatCount="indefinite"/>
+      <rect x="403.4" y="412.4" width="26" height="8" rx="3" fill="#2b343d"/>
+      <path d="M410,406 L434,414 L424,423 Z" fill="#f5a623"/>
+    </g>
+
+    <g>
+      <animateTransform attributeName="transform" type="rotate" values="0 379.6 379.6; -360 379.6 379.6"
+                        dur="1.8s" repeatCount="indefinite"/>
+      <rect x="366.6" y="375.6" width="26" height="8" rx="3" fill="#2b343d"/>
+      <path d="M368,370 L392,378 L382,387 Z" fill="#e8912a"/>
+    </g>
+
+    <circle cx="398" cy="398" r="13" fill="#37424d"/>
+  </g>
+
+  <!-- saddle -->
+  <path d="M318,282 Q340,270 368,278 Q370,290 344,292 Q320,294 318,282 Z" fill="#4a3b2f"/>
+  <path d="M352,290 L352,300" stroke="#37424d" stroke-width="7" stroke-linecap="round"/>
+
+  <!-- ==================== pelican ==================== -->
+  <!-- body group bobs twice per pedal stroke -->
+  <g>
+    <animateTransform attributeName="transform" type="translate"
+                      values="0 0; 0 -3; 0 0; 0 2.5; 0 0" dur="0.9s" repeatCount="indefinite"/>
+
+    <!-- tail -->
+    <path d="M264,220 C 240,204 224,202 210,210 C 226,220 238,236 250,250 Z"
+          fill="#e9eff5" stroke="#d3dde7" stroke-width="2"/>
+
+    <!-- body -->
+    <ellipse cx="325" cy="240" rx="67" ry="49" fill="url(#bodyGrad)" stroke="#d3dde7" stroke-width="2"
+             transform="rotate(-6 325 240)"/>
+
+    <!-- neck -->
+    <path d="M372,196 C 392,168 410,156 428,152 L 442,174 C 420,180 398,198 388,224 Z"
+          fill="url(#bodyGrad)" stroke="#d3dde7" stroke-width="2"/>
+
+    <!-- wing flaps gently around the shoulder -->
+    <g>
+      <animateTransform attributeName="transform" type="rotate"
+                        values="0 330 232; 4 330 232; 0 330 232; -2.5 330 232; 0 330 232"
+                        dur="1.8s" repeatCount="indefinite"/>
+      <path d="M292,222 C 314,192 358,194 374,236 C 352,264 310,262 292,222 Z"
+            fill="url(#wingGrad)" stroke="#cbd6e1" stroke-width="2"/>
+      <g stroke="#c3cfdb" stroke-width="2" fill="none" opacity=".9">
+        <path d="M306,214 C 322,226 336,240 344,254"/>
+        <path d="M328,206 C 342,220 352,234 356,248"/>
+      </g>
+    </g>
+
+    <!-- head, bill and pouch tilt very slightly with the bob -->
+    <g>
+      <animateTransform attributeName="transform" type="rotate"
+                        values="0 400 200; 1.6 400 200; 0 400 200; -1.2 400 200; 0 400 200"
+                        dur="0.9s" repeatCount="indefinite"/>
+      <ellipse cx="438" cy="148" rx="29" ry="25" fill="url(#bodyGrad)" stroke="#d3dde7" stroke-width="2"/>
+      <path d="M458,136 L606,157 L460,151 Z" fill="url(#beakGrad)"/>
+      <path d="M460,150 Q 506,206 601,159 Q 520,181 460,150 Z" fill="url(#pouchGrad)" opacity=".95"/>
+      <path d="M458,136 L606,157 L460,151 Z" fill="none" stroke="#d98312" stroke-width="1.6"/>
+      <circle cx="447" cy="138" r="5.4" fill="#22303c"/>
+      <circle cx="448.6" cy="136.2" r="1.7" fill="#ffffff"/>
+      <path d="M424,126 C 430,112 442,108 452,114" fill="none" stroke="#d3dde7" stroke-width="4" stroke-linecap="round"/>
+    </g>
+  </g>
+
+  <!-- near leg, drawn last so it rides on top of the frame -->
+  <path fill="none" stroke="#f5a623" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"
+        d="M338,282 L377.7,329.6 L416.4,416.4">
+    <animate attributeName="d" dur="1.8s" repeatCount="indefinite" calcMode="linear"
+      values="M338,282 L377.7,329.6 L416.4,416.4;M338,282 L374.8,331.9 L398.0,424.0;M338,282 L385.7,321.6 L379.6,416.4;M338,282 L395.2,305.9 L372.0,398.0;M338,282 L399.8,286.8 L379.6,379.6;M338,282 L399.8,277.0 L398.0,372.0;M338,282 L399.9,286.1 L416.4,379.6;M338,282 L394.4,307.7 L424.0,398.0;M338,282 L377.7,329.6 L416.4,416.4"/>
+  </path>
+</svg>
+</figure>
+<figcaption>鹈鹕骑自行车 · 动态 SVG（车轮转动 · 双腿踩踏 · 身体起伏 · 云朵飘移）</figcaption>
+<script>
+  // respect the OS "reduce motion" setting when the browser exposes it
+  (function () {
+    var scene = document.getElementById("scene");
+    if (!scene || !scene.pauseAnimations) return;
+    var mq = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (mq && mq.matches) scene.pauseAnimations();
+  })();
+</script>
+</body>
+</html>
