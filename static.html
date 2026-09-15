@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>鹈鹕骑自行车 · SVG 插画</title>
+<style>
+  :root { color-scheme: light; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+  }
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    padding: 32px 16px;
+    background: radial-gradient(circle at 50% 0%, #eef6fb 0%, #dbe8f2 60%, #cddcea 100%);
+    font-family: "Segoe UI", "Microsoft YaHei", system-ui, sans-serif;
+    box-sizing: border-box;
+  }
+  figure {
+    margin: 0;
+    width: min(920px, 100%);
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 18px 44px rgba(23, 47, 71, .18), 0 2px 6px rgba(23, 47, 71, .08);
+    overflow: hidden;
+  }
+  svg { display: block; width: 100%; height: auto; }
+  figcaption {
+    margin: 0;
+    padding: 14px 4px 0;
+    font-size: 14px;
+    letter-spacing: .04em;
+    color: #4a5b6b;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+<figure>
+<svg viewBox="0 0 800 560" role="img" aria-labelledby="title desc"
+     xmlns="http://www.w3.org/2000/svg">
+  <title id="title">鹈鹕骑自行车</title>
+  <desc id="desc">一只白色鹈鹕骑着蓝色自行车向右骑行，背景是晴空、云朵和草地。</desc>
+
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"  stop-color="#cfeafa"/>
+      <stop offset="55%" stop-color="#e8f5fd"/>
+      <stop offset="100%" stop-color="#f8fcff"/>
+    </linearGradient>
+    <linearGradient id="field" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"  stop-color="#cfe9cf"/>
+      <stop offset="100%" stop-color="#a9d3ad"/>
+    </linearGradient>
+    <linearGradient id="bodyGrad" x1="0.2" y1="0" x2="0.8" y2="1">
+      <stop offset="0%"  stop-color="#ffffff"/>
+      <stop offset="70%" stop-color="#f2f6fa"/>
+      <stop offset="100%" stop-color="#dde6ee"/>
+    </linearGradient>
+    <linearGradient id="wingGrad" x1="0" y1="0" x2="0.6" y2="1">
+      <stop offset="0%"  stop-color="#f7fafd"/>
+      <stop offset="100%" stop-color="#dae4ed"/>
+    </linearGradient>
+    <linearGradient id="beakGrad" x1="0" y1="0" x2="1" y2="0.4">
+      <stop offset="0%"  stop-color="#ffc15e"/>
+      <stop offset="100%" stop-color="#f09419"/>
+    </linearGradient>
+    <linearGradient id="pouchGrad" x1="0" y1="0" x2="0.3" y2="1">
+      <stop offset="0%"  stop-color="#ffd489"/>
+      <stop offset="100%" stop-color="#efa32a"/>
+    </linearGradient>
+    <linearGradient id="frameGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"  stop-color="#4b8fd0"/>
+      <stop offset="100%" stop-color="#245f96"/>
+    </linearGradient>
+  </defs>
+
+  <!-- sky -->
+  <rect x="0" y="0" width="800" height="560" fill="url(#sky)"/>
+
+  <!-- sun -->
+  <circle cx="112" cy="92" r="58" fill="#ffe9a8" opacity=".45"/>
+  <circle cx="112" cy="92" r="40" fill="#ffd978"/>
+
+  <!-- clouds -->
+  <g fill="#ffffff" opacity=".92">
+    <ellipse cx="318" cy="86" rx="52" ry="26"/>
+    <ellipse cx="360" cy="94" rx="38" ry="20"/>
+    <ellipse cx="286" cy="98" rx="34" ry="18"/>
+  </g>
+  <g fill="#ffffff" opacity=".72">
+    <ellipse cx="640" cy="62" rx="44" ry="21"/>
+    <ellipse cx="676" cy="70" rx="30" ry="16"/>
+  </g>
+
+  <!-- ground -->
+  <path d="M0,462 Q 200,428 420,452 T 800,444 L800,560 L0,560 Z" fill="url(#field)"/>
+  <path d="M0,486 Q 240,468 460,482 T 800,476" fill="none" stroke="#8fc498" stroke-width="3" opacity=".7"/>
+
+  <!-- speed lines -->
+  <g stroke="#9fb6c9" stroke-width="6" stroke-linecap="round" opacity=".55">
+    <line x1="52" y1="372" x2="140" y2="372"/>
+    <line x1="30" y1="404" x2="128" y2="404"/>
+    <line x1="60" y1="436" x2="132" y2="436"/>
+  </g>
+
+  <!-- shadow -->
+  <ellipse cx="405" cy="468" rx="214" ry="15" fill="#2f4a5a" opacity=".16"/>
+
+  <!-- ===== bicycle ===== -->
+  <!-- rear wheel -->
+  <g>
+    <circle cx="255" cy="400" r="62" fill="none" stroke="#37424d" stroke-width="10"/>
+    <circle cx="255" cy="400" r="54" fill="none" stroke="#cfd8e3" stroke-width="4"/>
+    <g stroke="#a9b5c2" stroke-width="2">
+      <line x1="255" y1="346" x2="255" y2="454"/>
+      <line x1="201" y1="400" x2="309" y2="400"/>
+      <line x1="217" y1="362" x2="293" y2="438"/>
+      <line x1="293" y1="362" x2="217" y2="438"/>
+    </g>
+    <circle cx="255" cy="400" r="9" fill="#37424d"/>
+  </g>
+
+  <!-- front wheel -->
+  <g>
+    <circle cx="555" cy="400" r="62" fill="none" stroke="#37424d" stroke-width="10"/>
+    <circle cx="555" cy="400" r="54" fill="none" stroke="#cfd8e3" stroke-width="4"/>
+    <g stroke="#a9b5c2" stroke-width="2">
+      <line x1="555" y1="346" x2="555" y2="454"/>
+      <line x1="501" y1="400" x2="609" y2="400"/>
+      <line x1="517" y1="362" x2="593" y2="438"/>
+      <line x1="593" y1="362" x2="517" y2="438"/>
+    </g>
+    <circle cx="555" cy="400" r="9" fill="#37424d"/>
+  </g>
+
+  <!-- chain -->
+  <g stroke="#8d99a6" stroke-width="3" fill="none">
+    <path d="M255,392 L398,382"/>
+    <path d="M255,408 L398,414"/>
+  </g>
+
+  <!-- frame -->
+  <g stroke="url(#frameGrad)" stroke-width="9" stroke-linecap="round" fill="none">
+    <path d="M255,400 L398,398"/>          <!-- chainstay -->
+    <path d="M255,400 L352,300"/>          <!-- seat stay -->
+    <path d="M398,398 L352,300"/>          <!-- seat tube -->
+    <path d="M398,398 L512,320"/>          <!-- down tube -->
+    <path d="M352,300 L505,275"/>          <!-- top tube -->
+    <path d="M505,275 L512,320"/>          <!-- head tube -->
+    <path d="M512,320 L555,400"/>          <!-- fork -->
+  </g>
+
+  <!-- handlebar -->
+  <g stroke="#37424d" stroke-width="7" stroke-linecap="round" fill="none">
+    <path d="M505,275 L500,258"/>
+    <path d="M474,254 Q500,242 528,254"/>
+  </g>
+
+  <!-- chainring + crank + pedals -->
+  <circle cx="398" cy="398" r="19" fill="none" stroke="#8d99a6" stroke-width="4"/>
+  <circle cx="398" cy="398" r="13" fill="#37424d"/>
+  <g stroke="#37424d" stroke-width="7" stroke-linecap="round">
+    <line x1="398" y1="398" x2="416" y2="416"/>
+    <line x1="398" y1="398" x2="380" y2="380"/>
+  </g>
+  <rect x="404" y="410" width="26" height="8" rx="3" fill="#2b343d" transform="rotate(45 417 414)"/>
+  <rect x="368" y="374" width="26" height="8" rx="3" fill="#2b343d" transform="rotate(45 381 378)"/>
+
+  <!-- saddle -->
+  <path d="M318,282 Q340,270 368,278 Q370,290 344,292 Q320,294 318,282 Z" fill="#4a3b2f"/>
+  <path d="M352,290 L352,300" stroke="#37424d" stroke-width="7" stroke-linecap="round"/>
+
+  <!-- ===== pelican ===== -->
+  <!-- far leg -->
+  <g stroke="#e8912a" stroke-width="8" stroke-linecap="round" fill="none">
+    <path d="M322,278 L344,330 L378,380"/>
+  </g>
+  <path d="M370,378 L392,386 L384,394 Z" fill="#e8912a"/>
+
+  <!-- tail feathers -->
+  <path d="M264,220 C 240,204 224,202 210,210 C 226,220 238,236 250,250 Z" fill="#e9eff5" stroke="#d3dde7" stroke-width="2"/>
+
+  <!-- body -->
+  <ellipse cx="325" cy="240" rx="67" ry="49" fill="url(#bodyGrad)" stroke="#d3dde7" stroke-width="2"
+           transform="rotate(-6 325 240)"/>
+
+  <!-- neck -->
+  <path d="M372,196 C 392,168 410,156 428,152 L 442,174 C 420,180 398,198 388,224 Z"
+        fill="url(#bodyGrad)" stroke="#d3dde7" stroke-width="2"/>
+
+  <!-- wing -->
+  <path d="M292,222 C 314,192 358,194 374,236 C 352,264 310,262 292,222 Z"
+        fill="url(#wingGrad)" stroke="#cbd6e1" stroke-width="2"/>
+  <g stroke="#c3cfdb" stroke-width="2" fill="none" opacity=".9">
+    <path d="M306,214 C 322,226 336,240 344,254"/>
+    <path d="M328,206 C 342,220 352,234 356,248"/>
+  </g>
+
+  <!-- head -->
+  <ellipse cx="438" cy="148" rx="29" ry="25" fill="url(#bodyGrad)" stroke="#d3dde7" stroke-width="2"/>
+
+  <!-- beak -->
+  <path d="M458,136 L606,157 L460,151 Z" fill="url(#beakGrad)"/>
+  <path d="M460,150 Q 506,206 601,159 Q 520,181 460,150 Z" fill="url(#pouchGrad)" opacity=".95"/>
+  <path d="M458,136 L606,157 L460,151 Z" fill="none" stroke="#d98312" stroke-width="1.6"/>
+
+  <!-- eye -->
+  <circle cx="447" cy="138" r="5.4" fill="#22303c"/>
+  <circle cx="448.6" cy="136.2" r="1.7" fill="#ffffff"/>
+
+  <!-- crest -->
+  <path d="M424,126 C 430,112 442,108 452,114" fill="none" stroke="#d3dde7" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- near leg (drawn last so it sits on top of the frame) -->
+  <g stroke="#f5a623" stroke-width="9" stroke-linecap="round" fill="none">
+    <path d="M338,282 L372,330 L412,410"/>
+  </g>
+  <path d="M404,404 L428,414 L418,422 Z" fill="#f5a623"/>
+</svg>
+</figure>
+<figcaption>鹈鹕骑自行车 · 纯 SVG 手绘（viewBox 800 × 560）</figcaption>
+</body>
+</html>
